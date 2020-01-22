@@ -1,0 +1,14 @@
+version: 1
+
+dataset:
+  dir: "input/"
+  feature_dir: "features/"
+  params:
+
+output_dir: "output/"
+
+pipeline:
+  - model1:
+      name: ""
+      features:
+        - Basic
