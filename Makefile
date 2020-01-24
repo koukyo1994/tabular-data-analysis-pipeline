@@ -1,5 +1,5 @@
 IMG := data-science-pipeline
-TAG := 2020.1.21
+TAG := 2020.1.22
 NAME := pipeline
 USER := kaggle
 
@@ -19,3 +19,6 @@ env:
 jupyter:
 	sudo chown ${USER}:${USER} /home/user/.jupyter
 	jupyter lab --port 9000 --ip 0.0.0.0 --NotebookApp.token=
+
+unittest:
+	python -m unittest discover -v -s ./test

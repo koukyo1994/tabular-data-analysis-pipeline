@@ -1,0 +1,19 @@
+version: 1
+
+dataset:
+  dir: "input/"
+  feature_dir: "features/"
+  params:
+
+output_dir: "output/"
+
+log_dir: "log/"
+
+pipeline:
+  - lgbm_with_av:
+      features:
+        - Basic
+      preprocess:
+      av: config/adversarial/_av_with_lgbm.yml
+      split: split/_kfold.yml
+      model: config/model/_lgbm_regression.yml

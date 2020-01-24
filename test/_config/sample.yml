@@ -1,0 +1,77 @@
+version: 1
+
+dataset:
+  dir: "input/"
+  feature_dir: "features/"
+  params:
+
+output_dir: "output/"
+
+log_dir: "log/"
+
+pipeline:
+  - lgbm_with_av:
+      features:
+        - Basic
+      preprocess:
+      av:
+        preprocess:
+          - to_remove:
+        split:
+          how: kfold
+          params:
+            random_state: 42
+            n_splits: 5
+        model:
+          name: lgbm
+          model_params:
+            objective: binary
+            metric: auc
+            boosting: gbdt
+            max_depth: 7
+            num_leaves: 75
+            learning_rate: 0.01
+            colsample_bytree: 0.7
+            subsample: 0.7
+            subsample_freq: 1
+            seed: 111
+            feature_fraction_seed: 111
+            drop_seed: 111
+            verbose: -1
+            n_jobs: -1
+            first_metric_only: True
+
+          train_params:
+            num_boost_round: 50000
+            early_stopping_rounds: 200
+            verbose_eval: 200
+      split:
+        how: kfold
+        params:
+          random_state: 42
+          n_splits: 5
+      model:
+        name: "lgbm"
+        model_params:
+          objective: "regression"
+          boosting_type: "gbdt"
+          max_depth: -1
+          num_leaves: 256
+          tree_learner: "serial"
+          learning_rate: 0.01
+          subsample: 0.7
+          subsample_freq: 1
+          colsample_bytree: 0.5
+          max_bin: 255
+          seed: 71
+          bagging_seed: 71
+          feature_fraction_seed: 71
+          drop_seed: 71
+          verbose: -1
+          n_jobs: -1
+          first_metric_only: True
+
+        train_params:
+          num_boost_round: 10000
+          early_stopping_rounds: 100
+          verbose_eval: 100
