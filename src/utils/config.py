@@ -23,7 +23,32 @@ def _merge_config(src: Optional[dict], dst: dict):
 
     for k, v in src.items():
         if isinstance(v, dict):
+            if dst.get(k) is None:
+                dst[k] = {}
             _merge_config(src[k], dst[k])
+        elif isinstance(v, str):
+            if v.endswith(".yml"):
+                sub_config = load_config(v, require_default=False)
+                _merge_config(sub_config.copy(), sub_config)
+                dst[k] = sub_config
+            else:
+                dst[k] = v
+        elif isinstance(v, list):
+            if dst.get(k) is None:
+                dst[k] = []
+            for i, elem in enumerate(v):
+                if isinstance(elem, dict):
+                    dst[k].append({})
+                    _merge_config(elem, dst[k][i])
+                elif isinstance(elem, str):
+                    if elem.endswith(".yml"):
+                        sub_config = load_config(elem, require_default=False)
+                        _merge_config(sub_config.copy(), sub_config)
+                        dst[k][i] = sub_config
+                    else:
+                        dst[k].append(elem)
+                else:
+                    dst[k].append(elem)
         else:
             dst[k] = v
 

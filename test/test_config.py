@@ -12,13 +12,14 @@ class TestLoadConfig(unittest.TestCase):
 
     def test_load_config(self):
         config = load_config("config/sample_lgbm_regression.yml")
-        self.assertFalse(self._trace_dict(config, self.sample))
+        self.assertTrue(self._trace_dict(config, self.sample))
 
     def _trace_dict(self, dict1: dict, dict2: dict):
         is_same = True
         for key in dict1.keys():
             if dict2.get(key) is None:
-                return False
+                if dict1.get(key) is not None:
+                    return False
             val1 = dict1.get(key)
             val2 = dict2.get(key)
             if isinstance(val1, dict):

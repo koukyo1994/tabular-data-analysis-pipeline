@@ -15,5 +15,5 @@ pipeline:
         - Basic
       preprocess:
       av: config/adversarial/_av_with_lgbm.yml
-      split: split/_kfold.yml
+      split: config/split/_kfold.yml
       model: config/model/_lgbm_regression.yml
