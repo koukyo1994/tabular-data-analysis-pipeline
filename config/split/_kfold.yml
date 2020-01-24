@@ -1,3 +1,4 @@
+version: 1
 how: kfold
 params:
   random_state: 42

@@ -15,14 +15,18 @@ pipeline:
         - Basic
       preprocess:
       av:
+        version: 1
         preprocess:
           - to_remove:
+            version: 1
         split:
+          version: 1
           how: kfold
           params:
             random_state: 42
             n_splits: 5
         model:
+          version: 1
           name: lgbm
           model_params:
             objective: binary
@@ -46,11 +50,13 @@ pipeline:
             early_stopping_rounds: 200
             verbose_eval: 200
       split:
+        version: 1
         how: kfold
         params:
           random_state: 42
           n_splits: 5
       model:
+        version: 1
         name: "lgbm"
         model_params:
           objective: "regression"

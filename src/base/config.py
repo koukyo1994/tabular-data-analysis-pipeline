@@ -6,6 +6,7 @@ from typing import Any, Dict, Optional, Union
 
 def _get_default() -> dict:
     cfg: Dict[str, Any] = dict()
+    cfg["version"] = 1
 
     cfg["dataset"] = dict()
     cfg["dataset"]["params"] = dict()

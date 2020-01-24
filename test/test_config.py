@@ -2,7 +2,7 @@ import unittest
 
 import yaml
 
-from src.utils import load_config
+from src.base.config import load_config
 
 
 class TestLoadConfig(unittest.TestCase):
@@ -17,6 +17,8 @@ class TestLoadConfig(unittest.TestCase):
     def _trace_dict(self, dict1: dict, dict2: dict):
         is_same = True
         for key in dict1.keys():
+            if not is_same:
+                return is_same
             if dict2.get(key) is None:
                 if dict1.get(key) is not None:
                     return False
