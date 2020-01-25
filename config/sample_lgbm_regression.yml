@@ -12,8 +12,8 @@ log_dir: "log/"
 pipeline:
   - lgbm_with_av:
       features:
-        - Basic
+        - config/features/v1/_basic.yml
       preprocess:
-      av: config/adversarial/_av_with_lgbm.yml
-      split: config/split/_kfold.yml
-      model: config/model/_lgbm_regression.yml
+      av: config/adversarial/v1/_av_with_lgbm.yml
+      split: config/split/v1/_kfold.yml
+      model: config/model/v1/_lgbm_regression.yml

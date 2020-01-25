@@ -45,11 +45,20 @@ def _merge_config(src: Optional[dict], dst: dict):
                     if elem.endswith(".yml"):
                         sub_config = load_config(elem, require_default=False)
                         _merge_config(sub_config.copy(), sub_config)
-                        dst[k][i] = sub_config
+                        if len(dst[k]) < i + 1:
+                            dst[k].append(sub_config)
+                        else:
+                            dst[k][i] = sub_config
                     else:
-                        dst[k].append(elem)
+                        if len(dst[k]) < i + 1:
+                            dst[k].append(elem)
+                        else:
+                            dst[k][i] = elem
                 else:
-                    dst[k].append(elem)
+                    if len(dst[k]) < i + 1:
+                        dst[k].append(elem)
+                    else:
+                        dst[k][i] = elem
         else:
             dst[k] = v
 

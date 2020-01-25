@@ -1,6 +1,0 @@
-version: 1
-preprocess:
-  - config/preprocess/_remove_columns.yml
-
-split: config/split/_kfold.yml
-model: config/model/_lgbm_binary.yml

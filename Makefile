@@ -2,6 +2,7 @@ IMG := data-science-pipeline
 TAG := 2020.1.22
 NAME := pipeline
 USER := kaggle
+CONFIG := config/sample_lgbm_regression.yml
 
 docker-build:
 	make -C docker/ IMG=${IMG} TAG=${TAG}
@@ -22,3 +23,6 @@ jupyter:
 
 unittest:
 	python -m unittest discover -v -s ./test
+
+run:
+	python main.py --config ${CONFIG}

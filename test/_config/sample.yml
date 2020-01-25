@@ -12,7 +12,8 @@ log_dir: "log/"
 pipeline:
   - lgbm_with_av:
       features:
-        - Basic
+        - version: 1
+          feature_name: Basic
       preprocess:
       av:
         version: 1
