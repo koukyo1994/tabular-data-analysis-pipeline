@@ -1,7 +1,7 @@
 version: 1
 
 dataset:
-  dir: "input/"
+  dir: input/
   feature_dir: "features/"
   params:
 
@@ -13,6 +13,25 @@ callbacks:
 
 pipeline:
   - lgbm_with_av:
+      data_loading:
+        - train:
+            version: 1
+            name: train.tsv
+            stats: train.tsv.stats
+            format: auto
+            mode: normal
+            structure:
+              id_column: train_id
+              target: price
+        - test:
+            version: 1
+            name: test.tsv
+            stats: test.tsv.stats
+            format: auto
+            mode: normal
+            structure:
+              id_column: test_id
+              target:
       features:
         - version: 1
           feature_name: Basic

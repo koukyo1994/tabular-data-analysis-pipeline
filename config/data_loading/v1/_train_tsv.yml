@@ -1,0 +1,9 @@
+train:
+  version: 1
+  name: train.tsv
+  stats: train.tsv.stats
+  format: auto
+  mode: normal
+  structure:
+    id_column: train_id
+    target: price

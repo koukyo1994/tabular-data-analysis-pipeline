@@ -13,6 +13,9 @@ callbacks:
 
 pipeline:
   - lgbm_with_av:
+      data_loading:
+        - config/data_loading/v1/_train_tsv.yml
+        - config/data_loading/v1/_test_tsv.yml
       features:
         - config/features/v1/_basic.yml
       preprocess:
