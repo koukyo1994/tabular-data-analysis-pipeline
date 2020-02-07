@@ -1,13 +1,15 @@
 version: 1
 
 dataset:
-  dir: "input/"
-  feature_dir: "features/"
+  dir: input/
+  feature_dir: features/
   params:
 
-output_dir: "output/"
+output_dir: output/
 
-log_dir: "log/"
+log_dir: log/
+
+callbacks:
 
 pipeline:
   - lgbm_with_av:

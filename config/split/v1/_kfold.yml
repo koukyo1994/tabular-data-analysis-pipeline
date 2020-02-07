@@ -1,5 +1,6 @@
 version: 1
 how: kfold
+callbacks:
 params:
   random_state: 42
   n_splits: 5
