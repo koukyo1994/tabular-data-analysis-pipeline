@@ -6,10 +6,8 @@ from typing import Any, Dict, Optional, Union
 
 def _get_default() -> dict:
     cfg: Dict[str, Any] = dict()
-    cfg["version"] = 1
 
-    cfg["dataset"] = dict()
-    cfg["dataset"]["params"] = dict()
+    cfg["feature_dir"] = "features/"
 
     cfg["output_dir"] = "output/"
     cfg["log_dir"] = "log/"
@@ -32,6 +30,8 @@ def _merge_config(src: Optional[dict], dst: dict):
                 sub_config = load_config(v, require_default=False)
                 _merge_config(sub_config.copy(), sub_config)
                 dst[k] = sub_config
+            elif v.startswith("(") and v.endswith(")"):
+                dst[k] = eval(v)
             else:
                 dst[k] = v
         elif isinstance(v, list):
@@ -39,16 +39,22 @@ def _merge_config(src: Optional[dict], dst: dict):
                 dst[k] = []
             for i, elem in enumerate(v):
                 if isinstance(elem, dict):
-                    dst[k].append({})
-                    _merge_config(elem, dst[k][i])
+                    if len(dst[k]) - 1 < i:
+                        dst[k] = dst[k].copy()
+                        dst[k].append({})
+                        _merge_config(elem, dst[k][i])
                 elif isinstance(elem, str):
                     if elem.endswith(".yml"):
                         sub_config = load_config(elem, require_default=False)
-                        _merge_config(sub_config.copy(), sub_config)
                         if len(dst[k]) < i + 1:
                             dst[k].append(sub_config)
                         else:
                             dst[k][i] = sub_config
+                    elif elem.startswith("(") and elem.endswith(")"):
+                        if len(dst[k]) < i + 1:
+                            dst[k].append(eval(elem))
+                        else:
+                            dst[k][i] = eval(elem)
                     else:
                         if len(dst[k]) < i + 1:
                             dst[k].append(elem)

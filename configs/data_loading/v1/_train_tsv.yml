@@ -1,5 +1,6 @@
 train:
   version: 1
+  source: input
   name: train.tsv
   stats: train.tsv.stats
   format: auto
