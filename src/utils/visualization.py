@@ -1,5 +1,7 @@
 import matplotlib.pyplot as plt
 import numpy as np
+import pandas as pd
+import seaborn as sns
 
 from pathlib import Path
 
@@ -74,4 +76,16 @@ def plot_confusion_matrix(y_true,
                 va="center",
                 color="white" if cm[i, j] > thresh else "black")
     fig.tight_layout()
+    plt.savefig(save_path)
+
+
+def plot_feature_importances(importances: pd.DataFrame, title: str,
+                             save_path: Path):
+    plt.figure(figsize=(20, 10))
+    sns.barplot(
+        x="value",
+        y="feature",
+        data=importances.sort_values(by="value", ascending=False).head(50))
+    plt.title(title)
+    plt.tight_layout()
     plt.savefig(save_path)
