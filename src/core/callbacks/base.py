@@ -26,7 +26,7 @@ class CallbackOrder(IntEnum):
 
 class Callback:
     signature = "base"
-    callback_order = CallbackOrder.HIGHEST
+    order = CallbackOrder.HIGHEST
 
     def __lt__(self, callback):
         return self.callback_order > callback.callback_order
@@ -40,22 +40,25 @@ class Callback:
     def __ge__(self, callback):
         return self.callback_order <= callback.callback_order
 
+    def _precondition(self, state: State):
+        pass
+
     def on_experiment_start(self, state: State):
         pass
 
     def on_experiment_end(self, state: State):
         pass
 
-    def on_data_loading_start(self, state: State):
+    def on_data_start(self, state: State):
         pass
 
-    def on_data_loading_end(self, state: State):
+    def on_data_end(self, state: State):
         pass
 
-    def on_features_start(self, state: State):
+    def on_fe_start(self, state: State):
         pass
 
-    def on_features_end(self, state: State):
+    def on_fe_end(self, state: State):
         pass
 
     def on_preprocess_start(self, state: State):
@@ -64,10 +67,10 @@ class Callback:
     def on_preprocess_end(self, state: State):
         pass
 
-    def on_feature_loading_start(self, state: State):
+    def on_loading_start(self, state: State):
         pass
 
-    def on_feature_loading_end(self, state: State):
+    def on_loading_end(self, state: State):
         pass
 
     def on_split_start(self, state: State):
@@ -76,20 +79,20 @@ class Callback:
     def on_split_end(self, state: State):
         pass
 
-    def on_model_train_start(self, state: State):
+    def on_train_start(self, state: State):
         pass
 
-    def on_model_train_end(self, state: State):
+    def on_train_end(self, state: State):
         pass
 
-    def on_model_inference_start(self, state: State):
+    def on_inference_start(self, state: State):
         pass
 
-    def on_model_inference_end(self, state: State):
+    def on_inference_end(self, state: State):
         pass
 
-    def on_train_fold_start(self, state: State):
+    def on_fold_start(self, state: State):
         pass
 
-    def on_train_fold_end(self, state: State):
+    def on_fold_end(self, state: State):
         pass
