@@ -8,7 +8,7 @@ import src.utils as utils
 from pathlib import Path
 from typing import Any, Dict, List, Optional
 
-from src.core import State
+from src.core.state import State
 from src.core.callbacks import Callback, CallbackOrder
 
 

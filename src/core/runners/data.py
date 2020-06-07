@@ -6,7 +6,7 @@ import src.utils as utils
 from pathlib import Path
 
 from . import SubRunner
-from src.core import State
+from src.core.state import State
 
 
 class DataRunner(SubRunner):

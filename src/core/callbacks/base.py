@@ -1,6 +1,6 @@
 from enum import auto, IntEnum
 
-from src.core import State
+from src.core.state import State
 
 
 class CallbackOrder(IntEnum):
