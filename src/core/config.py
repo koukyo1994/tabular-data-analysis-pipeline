@@ -1,3 +1,4 @@
+import pprint
 import yaml
 
 from pathlib import Path
@@ -86,3 +87,70 @@ def load_config(cfg_path: Optional[Union[str, Path]] = None,
         else:
             config = cfg
     return config
+
+
+def _handle_input(input_type="y/n", prompt=""):
+    while True:
+        if input_type == "y/n":
+            yn = input(prompt=prompt)
+            if yn.lower() in {"yes", "y"}:
+                return True
+            elif yn.lower() in {"no", "n"}:
+                return False
+            else:
+                print("Input value must be either `yes` or `no`")
+                continue
+        elif input_type == "int":
+            int_input = input(prompt=prompt)
+            try:
+                int_result = int(int_input)
+            except ValueError:
+                print("Input value must be an integer")
+                continue
+            return int_result
+        elif input_type == "str":
+            return input(prompt=prompt)
+        elif input_type == "float":
+            float_input = input(prompt=prompt)
+            try:
+                float_result = float(float_input)
+            except ValueError:
+                print("Input value must be a floating point number")
+                continue
+            return float_result
+        elif input_type == "List[str]":
+            elements = list()
+            elements.append(input(prompt=prompt))
+            while True:
+                if _handle_input(input_type="y/n", prompt="continue? [y/n]: "):
+                    elements.append(_handle_input(input_type="str", prompt=prompt))
+                else:
+                    break
+            return elements
+        elif input_type == "List[int]":
+
+
+
+def _collect_config_information(base_config: dict, show_current_value=False):
+    config = {}
+    for key, value in base_config.items():
+        if isinstance(value, dict):
+            if show_current_value:
+                print("Current:")
+                pprint.pprint(value)
+                print("Do you want to change? [y/n]: ", end="")
+                yn = input()
+            config[key] = _collect_config_information(value)
+        elif value == "str":
+
+
+
+def generate_config(config_type: str):
+    print("Base config:", end="")
+    base = input()
+
+    if base == "template":
+        base_config = load_config(f"configs/{config_type}/template.yml")
+    else:
+        base_config = load_config(base)
+

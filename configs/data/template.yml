@@ -1,9 +1,9 @@
-dir:
-name:
-stats:
-mode:
+dir: str
+name: str
+stats: str
+mode: str
 structure:
-  id_column:
-  target:
-required:
-role:
+  id_column: str
+  target: str
+required: str
+role: str

@@ -49,6 +49,7 @@ class SubRunner:
                     callbacks.append(callback)
 
         for callback in sorted(callbacks):
+            callback._precondition(self.state)
             callback.__getattribute__(method)(self.state)
 
     def run(self):
