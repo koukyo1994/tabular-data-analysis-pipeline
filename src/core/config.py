@@ -89,6 +89,8 @@ def load_config(cfg_path: Optional[Union[str, Path]] = None,
     return config
 
 
+# TODO: Config generator
+"""
 def _handle_input(input_type="y/n", prompt=""):
     while True:
         if input_type == "y/n":
@@ -129,8 +131,6 @@ def _handle_input(input_type="y/n", prompt=""):
             return elements
         elif input_type == "List[int]":
 
-
-
 def _collect_config_information(base_config: dict, show_current_value=False):
     config = {}
     for key, value in base_config.items():
@@ -153,4 +153,4 @@ def generate_config(config_type: str):
         base_config = load_config(f"configs/{config_type}/template.yml")
     else:
         base_config = load_config(base)
-
+"""
