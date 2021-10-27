@@ -12,7 +12,7 @@ cloudpickle==1.2.2
 cryptography==2.8
 cycler==0.10.0
 Cython==0.29.14
-dask==2.9.2
+dask==2021.10.0
 decorator==4.4.1
 defusedxml==0.6.0
 easydict==1.9.0
